@@ -9,10 +9,15 @@ passe-partout. Un contrôle mécanique va avec, il attrape ce qui reste.
 
 ## Installation
 
+**Hermes Agent**, par le chemin officiel. Le skill passe le scan de sécurité, verdict `SAFE`, vérifié
+le 2026-08-13 sur une installation réelle.
+
 ```bash
-git clone https://github.com/fullya99/style-redaction-agent.git \
-  ~/.hermes/skills/writing/style-redaction-agent
+hermes skills install https://github.com/fullya99/style-redaction-agent
 ```
+
+Les mises à jour se font ensuite par `hermes skills update`. Un `git clone` dans
+`~/.hermes/skills/` marche aussi, avec un `git pull` pour les mises à jour.
 
 **OpenClaw**
 
@@ -25,9 +30,10 @@ Le dossier de catégorie est du rangement, pas une condition, le scan est récur
 OpenClaw n'est pas à l'emplacement par défaut, regarde `agents.defaults.workspace` dans
 `~/.openclaw/openclaw.json`.
 
-Chez Hermes, `hermes skills install` refuse ce skill : son scan de sécurité voit qu'il fait exécuter
-un script et le classe `dangerous`, et `--force` ne lève pas ce verdict. Le `git clone` ci-dessus est
-la voie qui marche, et elle garde le `.git` pour les mises à jour.
+Ce skill passe le scan parce qu'il ne touche ni à la mémoire ni à la config de l'agent. Il lit des
+fichiers que tu lui donnes et il écrit du texte. Son voisin `cloture-agent`, qui range la mémoire de
+l'agent, est bloqué à l'installation officielle pour cette raison exacte, et c'est voulu par la
+plateforme.
 
 Pas besoin de redémarrer. Le skill est visible tout de suite par l'outil de liste, mais l'index de
 skills du prompt système est construit en début de session, donc il n'y apparaîtra qu'à la session
